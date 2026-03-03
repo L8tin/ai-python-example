@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<style>
+@media print {
+    body * {
+        visibility: hidden;
+    }
+    #card-container, #card-container * {
+        visibility: visible;
+    }
+    #card-container {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 5.5in;
+        height: 8.5in;
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+}
+/* Add to your style or <head> */
+body {
+    display: flex;
+    justify-content: center; /* center horizontally */
+    align-items: flex-start; /* start from top */
+    gap: 40px; /* space between form and card */
+    padding: 20px;
+}
+</style>
+    <meta charset="UTF-8">
+    <title>AI Adoption Cat Bio Generator</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/stylez.css') }}">
+</head>
+<body>
+
+    <form method="post">
+    <p style="text-align:center;"><img src="/static/images/Catswcheader2025.png" class="headerimage" alt="Cats of West Central IL Foster Adoption Header Cat Logo" ></p>
+    <h2>AI Adoption Cat Bio Generator</h2>
+        Name: <input type="text" name="name" value="{{ name }}"><br>
+        Age: <input type="text" name="age" value="{{ age }}"><br>
+        Personality: <input type="text" name="personality" value="{{ personality }}"><br>
+        Energy level: <input type="text" name="energy" value="{{ energy }}"><br>
+
+        Good with kids:
+        <select name="good_with_kids">
+            <option value="Yes" {% if good_with_kids=="Yes" %}selected{% endif %}>Yes</option>
+            <option value="No" {% if good_with_kids=="No" %}selected{% endif %}>No</option>
+            <option value="Not Sure" {% if good_with_kids=="Not Sure" %}selected{% endif %}>Not Sure</option>
+        </select><br>
+
+        Gender:
+        <select name="gender">
+            <option value="M" {% if gender=="M" %}selected{% endif %}>Male</option>
+            <option value="F" {% if gender=="F" %}selected{% endif %}>Female</option>
+        </select><br>
+
+        Breed / Mix:
+        <select name="breed">
+            <option value="D.S.H." {% if breed=="D.S.H." %}selected{% endif %}>Domestic Short Hair (D.S.H.)</option>
+            <option value="Domestic Long Hair" {% if breed=="Domestic Long Hair" %}selected{% endif %}>Domestic Long Hair</option>
+            <option value="Siamese" {% if breed=="Siamese" %}selected{% endif %}>Siamese</option>
+            <option value="Persian" {% if breed=="Persian" %}selected{% endif %}>Persian</option>
+            <option value="Maine Coon" {% if breed=="Maine Coon" %}selected{% endif %}>Maine Coon</option>
+            <option value="Ragdoll" {% if breed=="Ragdoll" %}selected{% endif %}>Ragdoll</option>
+            <option value="Bengal" {% if breed=="Bengal" %}selected{% endif %}>Bengal</option>
+            <option value="Sphynx" {% if breed=="Sphynx" %}selected{% endif %}>Sphynx</option>
+            <option value="Scottish Fold" {% if breed=="Scottish Fold" %}selected{% endif %}>Scottish Fold</option>
+            <option value="Russian Blue" {% if breed=="Russian Blue" %}selected{% endif %}>Russian Blue</option>
+            <option value="Abyssinian" {% if breed=="Abyssinian" %}selected{% endif %}>Abyssinian</option>
+            <option value="Birman" {% if breed=="Birman" %}selected{% endif %}>Birman</option>
+            <option value="Oriental" {% if breed=="Oriental" %}selected{% endif %}>Oriental</option>
+        </select><br>
+
+        Combo Vaccine Date: <input type="text" name="combo_vaccine_date" value="{{ combo_vaccine_date }}" placeholder="MM/DD/YYYY"><br>
+        Rabies Vaccine Date: <input type="text" name="rabies_vaccine_date" value="{{ rabies_vaccine_date }}" placeholder="MM/DD/YYYY"><br>
+        Arrival Date at Store: <input type="text" name="arrival_date" value="{{ arrival_date }}" placeholder="MM/DD/YYYY"><br>
+        Adoption Fee: <input type="text" name="adoption_fee" value="{{ adoption_fee }}" placeholder="$"><br>
+        Neat things to know about me: <br>
+        <textarea name="extra_info" rows="6" cols="50" placeholder="Fun facts about the cat...">{{ extra_info }}</textarea><br>
+
+        <input type="submit" value="Generate Bio">
+    </form>
+
+{% if bio %}
+<div id="card-container">
+    {% include 'pet_card.html' %}
+    <button onclick="window.print()">🖨 Print Cage Card</button>
+</div>
+{% endif %}
+</body>
+</html>

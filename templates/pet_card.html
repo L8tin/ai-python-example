@@ -1,0 +1,137 @@
+<!-- templates/pet_card.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Adoption Card</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f8f8f8;
+            display: flex;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .adoption-card {
+            width: 5.5in;  /* approx width */
+            height: 8.5in; /* approx height */
+            background: #ffffff;
+            border: 2px solid #333;
+            padding: 20px;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .logo-top {
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        .info-line {
+            display: flex;
+            justify-content: space-between;
+            margin: 5px 0;
+            font-size: 0.9rem;
+        }
+
+        .section-title {
+            font-weight: bold;
+            margin-top: 15px;
+            margin-bottom: 5px;
+        }
+
+        .name-box {
+            border: 3px solid #000;
+            text-align: center;
+            font-size: 1.5rem;
+            padding: 10px;
+            margin: 10px 0;
+            font-weight: bold;
+        }
+
+        .bold-centered {
+            text-align: center;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+
+        .checkbox-group {
+            display: flex;
+            gap: 15px;
+        }
+
+        .bio-section {
+            margin-top: 10px;
+            min-height: 6em;
+            font-size: 1rem;
+            line-height: 1.3em;
+        }
+
+        .footer-logos {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .adopt-me {
+            text-align: center;
+            margin-top: 15px;
+            font-weight: bold;
+            color: #d63333;
+        }
+    </style>
+</head>
+<body>
+<div class="adoption-card">
+    <!-- Top Logo -->
+    <div class="logo-top">
+        <img src="{{ url_for('static', filename='images/petsmart-charities-logo.png') }}" alt="Petsmart Charities" height="50">
+    </div>
+
+    <!-- First info lines -->
+    <div class="info-line">
+        <span>Date of Arrival at Store: {{ arrival_date or '____________' }}</span>
+        <span>Adoption Partner: <br>Cats of WC</span>
+        <span>Adoption Fee: ${{ adoption_fee or '____' }}</span>
+    </div>
+
+    <!-- Name -->
+    <div class="section-title">Hello, my name is:</div>
+    <div class="name-box">{{ name }}</div>
+
+    <!-- Pet description and basic info -->
+    <div class="info-line">
+        <span>Gender:</span>
+        <div class="checkbox-group">
+            <label><input type="checkbox" {% if gender=='M' %}checked{% endif %}> M</label>
+            <label><input type="checkbox" {% if gender=='F' %}checked{% endif %}> F</label>
+        </div>
+    </div>
+
+    <div class="info-line">
+        <span>Breed/Mix: {{ breed }}</span>
+        <span>Approx. Age: {{ age }}</span>
+    </div>
+
+    <div class="info-line">
+        <span>Combo Vaccine Administered: {{ combo_vaccine_date }}</span>
+        <span>Rabies Vaccine Administered: {{ rabies_vaccine_date }}</span>
+    </div>
+
+    <div class="bold-centered">This Pet has been spayed or neutered.</div>
+    <div class="bold-centered">Appropriate vaccination records are current and available.</div>
+
+    <div class="section-title">Neat things to know about me:</div>
+    <div class="bio-section">{{ bio }}<br>{{ extra_info }}</div>
+
+    <div class="adopt-me">Ask my adoption representative for details</div>
+
+    <!-- Footer logos -->
+    <div class="footer-logos">
+        <img src="{{ url_for('static', filename='images/Catswcheader2025.png') }}" alt="Pet Supply 1" height="40">
+    </div>
+</div>
